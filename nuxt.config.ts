@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   // @ts-ignore
   runtimeConfig: {
     public: {
-      baseURL: "http://localhost:8000/api"
+      baseURL: "http://localhost:8000/api/v1"
     }
   },
   app: {
@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     }
   },
   modules: [
+    "nuxt-lodash",
     ["@pinia/nuxt", { autoImports: ["defineStore", "storeToRefs"] }],
     "@pinia-plugin-persistedstate/nuxt",
     ["@nuxtjs/i18n", { vueI18n: './i18n.config.ts' }],

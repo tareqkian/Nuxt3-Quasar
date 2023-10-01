@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import {useAuthStore} from "~/@modules/auth/stores/auth-store";
-
 const leftDrawerOpen = ref(false)
 const miniState = ref(false)
 const miniLock = ref(true)

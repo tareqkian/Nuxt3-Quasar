@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {useAuthStore} from "~/@modules/auth/stores/auth-store";
+// import {useAuthStore} from "~/@modules/auth/stores/auth-store";
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 

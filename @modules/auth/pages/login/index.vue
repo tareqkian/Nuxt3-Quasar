@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import {useAuthStore} from "~/@modules/auth/stores/auth-store";
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
@@ -11,6 +10,7 @@ const credentials = reactive({
 })
 const handleLogin = () => authStore.login(credentials)
 </script>
+
 <template>
   <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
     <q-card-section>
@@ -33,6 +33,8 @@ const handleLogin = () => authStore.login(credentials)
           v-model="credentials.email"
           label="Email"
           lazy-rules
+          :error="!!user.error?.account"
+          :error-message="useJoin(user.error?.account, ' - ')"
         />
         <q-input
           type="password"
@@ -40,6 +42,8 @@ const handleLogin = () => authStore.login(credentials)
           v-model="credentials.password"
           label="Password"
           lazy-rules
+          :error="!!user.error?.password"
+          :error-message="useJoin(user.error?.password, ' - ')"
         />
         <div>
           <q-btn label="Login" type="submit" color="primary" :loading="user.loading" />
