@@ -29,6 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
   const login = async (credentials: Credentials) => {
     user.loading = true
     const { data, error } = await new Auth().login(credentials)
+    console.log(data, error)
     setUser(data.value, error.value?.data.errors)
   }
   const register = async (credentials: Credentials) => {

@@ -1,5 +1,3 @@
-import {CookieRef} from "#app";
-
 type Credentials = {
   name?: string
   email: string
@@ -10,13 +8,7 @@ export class Auth {
   constructor(
   ) {}
 
-  login = (credentials: Credentials) => useBaseApi('/auth/login', {
-    method: "POST",
-    body: credentials
-  })
-  register = (credentials: Credentials) => useBaseApi('/auth/register', {
-    method: "POST",
-    body: credentials
-  })
-  logout = () => useBaseApi('/logout', {method: "POST"})
+  login = async (credentials: Credentials) => await useBaseApi('/auth/login', { method: "POST", body: credentials })
+  register = async (credentials: Credentials) => await useBaseApi('/auth/register', { method: "POST", body: credentials })
+  logout = async () => await useBaseApi('/logout', {method: "POST"})
 }
