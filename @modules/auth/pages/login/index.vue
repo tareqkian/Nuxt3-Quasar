@@ -6,13 +6,13 @@ definePageMeta({layout: 'auth', key: "is-guest"})
 
 const credentials = reactive({
   email: '',
-  password: '',
+  password: ''
 })
 const handleLogin = () => authStore.login(credentials)
 </script>
 
 <template>
-  <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
+  <q-card :style="$q.screen.lg ? {'width': '30%'} : {'width': '80%'}">
     <q-card-section>
       <q-avatar size="103px" class="absolute-center shadow-10" color="white" icon="person" />
     </q-card-section>
@@ -50,6 +50,7 @@ const handleLogin = () => authStore.login(credentials)
         </div>
       </q-form>
     </q-card-section>
+    <pre>{{ $q.screen }}</pre>
   </q-card>
 </template>
 

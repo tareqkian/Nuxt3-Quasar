@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  ssr: true,
   devtools: { enabled: true },
   // @ts-ignore
   runtimeConfig: {
@@ -20,11 +21,11 @@ export default defineNuxtConfig({
     }
   },
   modules: [
+    "nuxt-quasar-ui",
     "nuxt-lodash",
     ["@pinia/nuxt", { autoImports: ["defineStore", "storeToRefs"] }],
     "@pinia-plugin-persistedstate/nuxt",
-    ["@nuxtjs/i18n", { vueI18n: './i18n.config.ts' }],
-    ["nuxt-quasar-ui", {}]
+    ["@nuxtjs/i18n", { vueI18n: './i18n.config.ts' }]
   ],
   piniaPersistedstate: {
     cookieOptions: { sameSite: 'strict' },

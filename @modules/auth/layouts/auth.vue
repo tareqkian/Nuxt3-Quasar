@@ -3,7 +3,7 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="flex bg-image flex-center">
+      <q-page class="flex flex-center bg-image">
         <slot />
       </q-page>
     </q-page-container>
