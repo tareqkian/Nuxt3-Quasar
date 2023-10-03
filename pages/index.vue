@@ -9,6 +9,4 @@ definePageMeta({ key: "require-auth" })
   <pre>{{ user }}</pre>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -6,48 +6,34 @@ export class Auth {
     private user: User
   ) {}
 
-  protected setUser = (data: Ref, error: Ref) => {
-    this.user.user = data.value?.user || ""
-    this.user.token = data.value?.token || ""
-    this.user.error = error.value?.data.errors
+  protected setUser = (data: any, errors: any) => {
+    this.user.user = data?.user || ""
+    this.user.token = data?.token || ""
+    this.user.error = errors
   }
 
   login = (credentials: Credentials) => {
     const {
       pending,
       data,
-      error
-    } = useBaseApi('/auth/login', {
-      method: "POST",
-      body: credentials,
-      onRequestError: (request) => {
-        console.log("onRequestError ", request)
-        this.setUser(data, error)
-      },
-      onResponse: (request) => {
-        console.log("onResponse ", request)
-        this.setUser(data, error)
-      },
-      onResponseError: (request) => {
-        console.log("onResponseError ", request)
-        this.setUser(data, error)
-      },
-    })
+      error,
+    } = useBaseApi('/auth/login', credentials).post()
     this.user.loading = pending
+    console.log(data.value, error.value?.data)
   }
-  register = async (credentials: Credentials) => {
+  register =  (credentials: Credentials) => {
     const {
       pending,
       data,
       error
-    } = useBaseApi('/auth/register', {method: "POST", body: credentials})
-    this.setUser(pending, data.value, error.value)
+    } = useBaseApi('/auth/register', credentials).post()
+    this.setUser(data.value, error.value)
   }
-  logout = async () => {
+  logout = () => {
     const {
       pending,
       error
-    } = useBaseApi('/logout', {method: "POST"})
-    this.setUser(pending, {}, error.value)
+    } = useBaseApi('/logout').post()
+    this.setUser({}, error.value)
   }
 }

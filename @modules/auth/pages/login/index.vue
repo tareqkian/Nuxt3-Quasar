@@ -33,8 +33,8 @@ const handleLogin = () => authStore.login(credentials)
           v-model="credentials.email"
           label="Email"
           lazy-rules
-          :error="!!user.error?.account"
-          :error-message="useJoin(user.error?.account, ' - ')"
+          :error="!!user.error?.email"
+          :error-message="useJoin(user.error?.email, ' - ')"
         />
         <q-input
           type="password"

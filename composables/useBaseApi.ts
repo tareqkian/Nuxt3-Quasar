@@ -1,4 +1,5 @@
-export const useBaseApi = (URL: string, options: any = {}) => {
+
+const useBaseApiConfig = (URL: string, body: any = {}, options: any = {}) => {
   let headers: any = {
     lang: "en",
     Accept: "application/json",
@@ -10,6 +11,7 @@ export const useBaseApi = (URL: string, options: any = {}) => {
   if ( _token ) headers.Authorization = `Bearer ${_token}`
 
   return useLazyFetch(URL, {
+    body,
     baseURL: useRuntimeConfig().public.baseURL,
     credentials: "include",
     watch: false,
@@ -19,4 +21,14 @@ export const useBaseApi = (URL: string, options: any = {}) => {
       ...options?.headers
     }
   })
+}
+
+export const useBaseApi = (URL: string, body: any = {}, options: any = {}) => {
+  const get = () => useBaseApiConfig(URL, body, {method: "GET", ...options})
+  const post = () => useBaseApiConfig(URL, body, {method: "POST", ...options})
+  const put = () => useBaseApiConfig(URL, body, {method: "POST", ...options})
+  const patch = () => useBaseApiConfig(URL, body, {method: "PATCH", ...options})
+  const del = () => useBaseApiConfig(URL, body, {method: "DELETE", ...options})
+
+  return {get, post, put, patch, del}
 }
