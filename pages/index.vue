@@ -2,7 +2,7 @@
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
-definePageMeta({ key: "require-auth" })
+definePageMeta({ auth: "require-auth" })
 </script>
 
 <template>

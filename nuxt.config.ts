@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   },
   modules: [
     "nuxt-quasar-ui",
+    "@sidebase/nuxt-auth",
     "nuxt-lodash",
     ["@pinia/nuxt", { autoImports: ["defineStore", "storeToRefs"] }],
     "@pinia-plugin-persistedstate/nuxt",

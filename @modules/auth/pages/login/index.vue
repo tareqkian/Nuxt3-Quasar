@@ -2,13 +2,10 @@
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
-definePageMeta({layout: 'auth', key: "is-guest"})
+definePageMeta({layout: 'auth', auth: "is-guest"})
 
-const credentials = reactive({
-  email: '',
-  password: ''
-})
-const handleLogin = () => authStore.login(credentials)
+const credentials = reactive({account: '', password: ''})
+const handleLogin = async () => authStore.login(credentials)
 </script>
 
 <template>
@@ -30,11 +27,11 @@ const handleLogin = () => authStore.login(credentials)
       >
         <q-input
           filled
-          v-model="credentials.email"
+          v-model="credentials.account"
           label="Email"
           lazy-rules
-          :error="!!user.error?.email"
-          :error-message="useJoin(user.error?.email, ' - ')"
+          :error="!!user.error?.account"
+          :error-message="useJoin(user.error?.account, ' - ')"
         />
         <q-input
           type="password"
@@ -50,7 +47,6 @@ const handleLogin = () => authStore.login(credentials)
         </div>
       </q-form>
     </q-card-section>
-    <pre>{{ $q.screen }}</pre>
   </q-card>
 </template>
 

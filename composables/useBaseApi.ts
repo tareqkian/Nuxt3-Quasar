@@ -6,11 +6,14 @@ const useBaseApiConfig = (URL: string, body: any = {}, options: any = {}) => {
     "Content-Type": "application/json"
   }
 
+  if ( process.server ) headers = { ...headers, ...useRequestHeaders(['cookie']) }
+
   // @ts-ignore
   const _token: string|null = useCookie("auth").value?.user.token
   if ( _token ) headers.Authorization = `Bearer ${_token}`
 
   return useLazyFetch(URL, {
+    immediate: false,
     body,
     baseURL: useRuntimeConfig().public.baseURL,
     credentials: "include",

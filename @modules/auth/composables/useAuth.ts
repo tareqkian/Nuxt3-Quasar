@@ -1,39 +1,49 @@
 import {Credentials, User} from "~/@modules/auth/helpers/types";
-import {Ref} from "vue";
 
 export class Auth {
   constructor(
     private user: User
   ) {}
 
-  protected setUser = (data: any, errors: any) => {
-    this.user.user = data?.user || ""
-    this.user.token = data?.token || ""
-    this.user.error = errors
+  protected setUser = (data: any, error: any) => {
+    this.user.user = data?.result?.user || ""
+    this.user.token = data?.result?.token.access_token || ""
+    this.user.error = error?.errors || ""
   }
 
-  login = (credentials: Credentials) => {
+  login = async (credentials: Credentials) => {
     const {
       pending,
       data,
       error,
-    } = useBaseApi('/auth/login', credentials).post()
+      execute,
+      status
+    } = useBaseApi('/auth/login', {...credentials, account_type: "vendor"}).post()
     this.user.loading = pending
-    console.log(data.value, error.value?.data)
+    await execute()
+    if ( status.value === 'success' ) this.setUser(data.value, error.value?.data)
   }
-  register =  (credentials: Credentials) => {
+  register = async (credentials: Credentials) => {
     const {
       pending,
       data,
-      error
+      error,
+      execute,
+      status
     } = useBaseApi('/auth/register', credentials).post()
-    this.setUser(data.value, error.value)
+    this.user.loading = pending
+    await execute()
+    if ( status.value === 'success' ) this.setUser(data.value, error.value?.data)
   }
-  logout = () => {
+  logout = async () => {
     const {
       pending,
-      error
-    } = useBaseApi('/logout').post()
-    this.setUser({}, error.value)
+      error,
+      execute,
+      status
+    } = useBaseApi('/auth/logout').del()
+    this.user.loading = pending
+    await execute()
+    if ( status.value === 'success' ) this.setUser({}, error.value?.data)
   }
 }

@@ -6,7 +6,7 @@ export type User = {
 }
 export type Credentials = {
   name?: string
-  email: string
+  account: string
   password: string
   password_confirmation?: string
 }

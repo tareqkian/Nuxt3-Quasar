@@ -3,7 +3,7 @@
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
-definePageMeta({layout: 'auth', key: "is-guest"})
+definePageMeta({layout: 'auth', auth: "is-guest"})
 
 const credentials = reactive({
   name: '',

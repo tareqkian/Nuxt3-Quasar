@@ -13,6 +13,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/i18n": "^8.0.0-rc.4",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
+    "@sidebase/nuxt-auth": "^0.6.0-beta.6",
     "nuxt": "^3.7.4",
     "nuxt-lodash": "^2.5.0",
     "nuxt-quasar-ui": "^2.0.5",
@@ -23,6 +24,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@quasar/extras": "^1.16.7",
+    "next-auth": "^4.21.1",
     "pinia": "^2.1.6",
     "quasar": "^2.12.7"
   }

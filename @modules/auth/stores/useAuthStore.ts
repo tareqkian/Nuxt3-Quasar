@@ -10,9 +10,18 @@ export const useAuthStore = defineStore('auth', () => {
 
   const AuthApi = new Auth(user)
 
-  const login = (credentials: Credentials) => AuthApi.login(credentials)
-  const register = async (credentials: Credentials) => AuthApi.register(credentials)
-  const logout = async () => AuthApi.logout()
+  const login = async (credentials: Credentials) => {
+    await AuthApi.login(credentials)
+    navigateTo('/')
+  }
+  const register = async (credentials: Credentials) => {
+    await AuthApi.register(credentials)
+    navigateTo('/')
+  }
+  const logout = async () => {
+    await AuthApi.logout()
+    navigateTo('/login')
+  }
 
   return {user, login, register, logout}
 }, {
