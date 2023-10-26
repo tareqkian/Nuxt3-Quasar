@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import {signIn} from "next-auth/react";
+
+const viewport = useViewport()
+
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
@@ -6,10 +10,12 @@ definePageMeta({layout: 'auth', auth: "is-guest"})
 
 const credentials = reactive({account: '', password: ''})
 const handleLogin = async () => authStore.login(credentials)
+// const handleLogin = async () => signIn('credentials', credentials).catch(e => console.log(e))
+
 </script>
 
 <template>
-  <q-card :style="$q.screen.lg ? {'width': '30%'} : {'width': '80%'}">
+  <q-card :style="viewport.isGreaterOrEquals('desktopMedium') ? {'width': '30%'} : {'width': '80%'}">
     <q-card-section>
       <q-avatar size="103px" class="absolute-center shadow-10" color="white" icon="person" />
     </q-card-section>
@@ -28,7 +34,7 @@ const handleLogin = async () => authStore.login(credentials)
         <q-input
           filled
           v-model="credentials.account"
-          label="Email"
+          label="Account"
           lazy-rules
           :error="!!user.error?.account"
           :error-message="useJoin(user.error?.account, ' - ')"

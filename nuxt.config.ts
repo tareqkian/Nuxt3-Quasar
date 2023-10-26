@@ -1,7 +1,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  // @ts-ignore
   runtimeConfig: {
+    account_type: 'vendor',
+    ofetch: {
+      baseURL: "http://localhost:8000/api/v1",
+      credentials: "include",
+      watch: false,
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    },
     public: {
       baseURL: "http://localhost:8000/api/v1"
     }
@@ -20,6 +29,7 @@ export default defineNuxtConfig({
     }
   },
   modules: [
+    ["nuxt-viewport", { /* Options */ }],
     "nuxt-quasar-ui",
     "@sidebase/nuxt-auth",
     "nuxt-lodash",

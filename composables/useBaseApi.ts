@@ -1,26 +1,17 @@
-
 const useBaseApiConfig = (URL: string, body: any = {}, options: any = {}) => {
-  let headers: any = {
-    lang: "en",
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  }
-
-  if ( process.server ) headers = { ...headers, ...useRequestHeaders(['cookie']) }
+  const config = useRuntimeConfig()
+  // if ( process.server ) headers = {...headers, ...useRequestHeaders(['cookie'])}
 
   // @ts-ignore
-  const _token: string|null = useCookie("auth").value?.user.token
-  if ( _token ) headers.Authorization = `Bearer ${_token}`
+  // const _token: string|null = useCookie("auth").value?.user.token
+  // if ( _token ) headers.Authorization = `Bearer ${_token}`
 
   return useLazyFetch(URL, {
-    immediate: false,
     body,
-    baseURL: useRuntimeConfig().public.baseURL,
-    credentials: "include",
-    watch: false,
+    ...config.ofetch,
     ...options,
     headers: {
-      ...headers,
+      ...config.ofetch.headers,
       ...options?.headers
     }
   })
